@@ -26,10 +26,10 @@ function LandingPage() {
       {/* Title */}
       <div className="text-center px-6 py-20">
         <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-          Turn Concert <span className="text-green-400">Setlists</span><br />
+          Turn Concert <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">Setlists</span><br />
           Into Playlists
         </h2>
-        <p className="text-xl text-gray-200 mb-14">
+        <p className="text-2xl text-gray-200 mb-14">
           Relive your favorite concerts by creating Spotify playlists from their setlists.
         </p>
 
@@ -45,7 +45,7 @@ function LandingPage() {
           />
           <button
             onClick={handleSearch}
-            className="bg-green-500 px-4 py-3 rounded-r-lg text-white"
+            className="bg-green-500 px-7 py-5 rounded-r-lg text-white"
           >
             Search
           </button>
