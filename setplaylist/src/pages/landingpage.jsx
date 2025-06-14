@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { Music, Calendar, Users } from "lucide-react";
+import { Music, Calendar, Users, Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+
 
 function LandingPage() {
+  const navigate = useNavigate();
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
-      console.log("Searching for:", searchTerm);
+      navigate(`/search?q=${encodeURIComponent(searchTerm)}`);
     }
   };
 
@@ -19,7 +24,7 @@ function LandingPage() {
           <h1 className="text-3xl font-bold">SetPlaylist</h1>
         </div>
         <button className="bg-green-500 px-10 py-4 rounded-full text-white">
-          <hl className="text-1xl font-bold"> Login / Sign Up </hl>
+          <span className="text-xl font-bold"> Login / Sign Up </span>
         </button>
       </nav>
 
@@ -35,24 +40,29 @@ function LandingPage() {
 
         {/* Search Section */}
         <div className="flex justify-center">
-          <input
-            type="text"
-            placeholder="Search artist or concert..."
-            className="p-4 rounded-l-lg w-64 text-black placeholder-gray-500"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyUp={(e) => e.key === "Enter" && handleSearch()}
-          />
-          <button
-            onClick={handleSearch}
-            className="bg-green-500 px-7 py-5 rounded-r-lg text-white"
-          >
-            Search
-          </button>
+          <div className="flex w-full max-w-md">
+            <div className="relative flex-grow">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search artist or concert..."
+                className="bg-white/10 border border-white/20 text-white placeholder-gray-400 pl-10 pr-4 py-3 rounded-l-lg w-full"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyUp={(e) => e.key === "Enter" && handleSearch()}
+              />
+            </div>
+            <button
+              onClick={handleSearch}
+              className="bg-green-500 px-6 py-3 rounded-r-lg text-white hover:bg-green-600"
+            >
+              Search
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Feature Cards */}
+      {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 pb-20 max-w-5xl mx-auto">
         <div className="bg-white/10 p-6 rounded-lg text-center backdrop-blur-md hover:bg-white/20 transition-all duration-300">
           <Music className="h-14 w-14 mx-auto text-green-400 mb-5" />
