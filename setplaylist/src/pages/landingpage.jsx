@@ -2,12 +2,11 @@ import { useState } from "react";
 import { Music, Calendar, Users, Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-
-
 function LandingPage() {
   const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
@@ -16,14 +15,17 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white relative">
       {/* Header */}
       <nav className="flex justify-between items-center p-6">
         <div className="flex items-center space-x-2">
           <Music className="h-10 w-10 text-green-400" />
           <h1 className="text-3xl font-bold">SetPlaylist</h1>
         </div>
-        <button className="bg-green-500 px-10 py-4 rounded-full text-white">
+        <button
+          onClick={() => setShowLoginModal(true)}
+          className="bg-green-500 px-10 py-4 rounded-full text-white"
+        >
           <span className="text-xl font-bold"> Login / Sign Up </span>
         </button>
       </nav>
@@ -82,10 +84,36 @@ function LandingPage() {
           <p className="text-gray-300">Share playlists and discover new music from other fans.</p>
         </div>
       </div>
+
+      {/* Login / Signup Popup */}
+      {showLoginModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+          <div className="bg-white rounded-xl p-8 max-w-md w-full shadow-lg relative text-black">
+            <button
+              onClick={() => setShowLoginModal(false)}
+              className="absolute top-2 right-3 text-gray-500 hover:text-black text-2xl"
+            >
+              &times;
+            </button>
+            <h2 className="text-2xl font-bold mb-6 text-center">Login / Sign Up</h2>
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full p-3 mb-4 border border-gray-300 rounded"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              className="w-full p-3 mb-6 border border-gray-300 rounded"
+            />
+            <button className="bg-green-500 text-white w-full py-3 rounded hover:bg-green-600">
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
 export default LandingPage;
-
-
